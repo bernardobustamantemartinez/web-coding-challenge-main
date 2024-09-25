@@ -1,14 +1,22 @@
 {
   "todos": [
     {
-      "id": 1,
-      "text": "Learn Vite",
-      "completed": false
+      "text": "Ability to add/delete todos using API calls",
+      "id": 1727222488571,
+      "completed": false,
+      "priority": false
     },
     {
-      "id": 2,
-      "text": "Build a TODO app",
-      "completed": false
+      "text": "Fix styling",
+      "id": 1727222493834,
+      "completed": false,
+      "priority": true
+    },
+    {
+      "text": "Fix add / delete functions",
+      "id": 1727223007014,
+      "completed": false,
+      "priority": false
     }
   ]
 }

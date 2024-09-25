@@ -1,8 +1,8 @@
 import "./TodoItem.css";
 
-function TodoItem({ todo, toggleTodo, deleteTodo }) {
+function TodoItem({ todo, toggleTodo, deleteTodo, togglePriority }) {
   return (
-    <li className="todo-item">
+    <li className={`todo-item ${todo.priority ? "priority" : ""}`}>
       <input
         type="checkbox"
         checked={todo.completed}
@@ -15,6 +15,12 @@ function TodoItem({ todo, toggleTodo, deleteTodo }) {
       >
         {todo.text}
       </span>
+      <button
+        onClick={() => togglePriority(todo.id)}
+        className="priority-button"
+      >
+        {todo.priority ? "⭐" : "☆"}
+      </button>
       <button onClick={() => deleteTodo(todo.id)} className="delete-button">
         Delete
       </button>

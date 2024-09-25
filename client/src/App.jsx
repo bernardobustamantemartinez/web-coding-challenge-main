@@ -5,25 +5,15 @@ import "./App.css";
 
 function App() {
   const [todos, setTodos] = useState([]);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchTodos();
   }, []);
 
   const fetchTodos = async () => {
-    try {
-      const response = await fetch("/api/todos");
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      console.log("Fetched todos:", data);
-      setTodos(data);
-    } catch (e) {
-      console.error("Error fetching todos:", e);
-      setError("Failed to fetch todos. Please try again later.");
-    }
+    const response = await fetch("/api/todos");
+    const data = await response.json();
+    setTodos(data);
   };
 
   const addTodo = async (text) => {
@@ -58,12 +48,34 @@ function App() {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
+  const togglePriority = async (id) => {
+    const todoToToggle = todos.find((todo) => todo.id === id);
+    const response = await fetch(`/api/todos/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ priority: !todoToToggle.priority }),
+    });
+    const updatedTodo = await response.json();
+    setTodos(todos.map((todo) => (todo.id === id ? updatedTodo : todo)));
+  };
+
+  const sortedTodos = [...todos].sort((a, b) => {
+    if (a.priority === b.priority) return 0;
+    return a.priority ? -1 : 1;
+  });
+
   return (
     <div className="App">
       <h1>TODO App</h1>
-      {error && <p style={{ color: "red" }}>{error}</p>}
       <TodoForm addTodo={addTodo} />
-      <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
+      <TodoList
+        todos={sortedTodos}
+        toggleTodo={toggleTodo}
+        deleteTodo={deleteTodo}
+        togglePriority={togglePriority}
+      />
     </div>
   );
 }

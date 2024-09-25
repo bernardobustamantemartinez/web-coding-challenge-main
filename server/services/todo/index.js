@@ -19,7 +19,12 @@ const getTodos = () => {
 
 const addTodo = (todo) => {
   const db = readDatabase();
-  const newTodo = { ...todo, id: Date.now(), completed: false };
+  const newTodo = {
+    ...todo,
+    id: Date.now(),
+    completed: false,
+    priority: false,
+  };
   db.todos.push(newTodo);
   writeDatabase(db);
   return newTodo;
