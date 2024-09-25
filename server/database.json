@@ -3,20 +3,38 @@
     {
       "text": "Ability to add/delete todos using API calls",
       "id": 1727222488571,
-      "completed": false,
+      "completed": true,
       "priority": false
     },
     {
       "text": "Fix styling",
       "id": 1727222493834,
-      "completed": false,
+      "completed": true,
       "priority": false
     },
     {
       "text": "Fix add / delete functions",
       "id": 1727223007014,
-      "completed": false,
+      "completed": true,
       "priority": false
+    },
+    {
+      "text": "CRUD functionality",
+      "id": 1727225050506,
+      "completed": true,
+      "priority": false
+    },
+    {
+      "text": "Prioritize functionality",
+      "id": 1727244765473,
+      "completed": true,
+      "priority": false
+    },
+    {
+      "text": "Sub todos",
+      "id": 1727244771761,
+      "completed": false,
+      "priority": true
     }
   ]
 }
