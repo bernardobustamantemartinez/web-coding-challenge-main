@@ -8,6 +8,7 @@ function TodoItem({
   deleteTodo,
   togglePriority,
   addSubTodo,
+  toggleSubTodo,
 }) {
   const [isAddingSubTodo, setIsAddingSubTodo] = useState(false);
   const [subTodoText, setSubTodoText] = useState("");
@@ -79,17 +80,21 @@ function TodoItem({
       )}
       {todo.subTodos && todo.subTodos.length > 0 && (
         <ul className="ml-8 mt-2">
-          {todo.subTodos.map((subTodo, index) => (
-            <li key={index} className="flex items-center mb-1">
+          {todo.subTodos.map((subTodo) => (
+            <li key={subTodo.id} className="flex items-center mb-1">
               <input
                 type="checkbox"
                 checked={subTodo.completed}
-                onChange={() => {
-                  /* Add sub-todo toggle functionality */
-                }}
+                onChange={() => toggleSubTodo(todo.id, subTodo.id)}
                 className="mr-2"
               />
-              <span>{subTodo.text}</span>
+              <span
+                className={
+                  subTodo.completed ? "line-through text-gray-500" : ""
+                }
+              >
+                {subTodo.text}
+              </span>
             </li>
           ))}
         </ul>
@@ -106,6 +111,7 @@ TodoItem.propTypes = {
     priority: PropTypes.bool.isRequired,
     subTodos: PropTypes.arrayOf(
       PropTypes.shape({
+        id: PropTypes.number.isRequired,
         text: PropTypes.string.isRequired,
         completed: PropTypes.bool.isRequired,
       })
@@ -115,6 +121,7 @@ TodoItem.propTypes = {
   deleteTodo: PropTypes.func.isRequired,
   togglePriority: PropTypes.func.isRequired,
   addSubTodo: PropTypes.func.isRequired,
+  toggleSubTodo: PropTypes.func.isRequired,
 };
 
 export default TodoItem;

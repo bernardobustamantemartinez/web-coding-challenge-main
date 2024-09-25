@@ -24,6 +24,7 @@ const addTodo = (todo) => {
     id: Date.now(),
     completed: false,
     priority: false,
+    subTodos: [],
   };
   db.todos.push(newTodo);
   writeDatabase(db);
@@ -42,39 +43,51 @@ const updateTodo = (id, updatedTodo) => {
 };
 
 const deleteTodo = (id) => {
-  console.log(`Attempting to delete todo with id: ${id}`);
   const db = readDatabase();
-  if (!Array.isArray(db.todos)) {
-    console.log("db.todos is not an array");
-    return false;
-  }
   const initialLength = db.todos.length;
-  console.log(`Initial todos length: ${initialLength}`);
-  db.todos = db.todos.filter((todo) => todo.id !== parseInt(id));
-  console.log(`New todos length: ${db.todos.length}`);
+  db.todos = db.todos.filter((todo) => todo.id !== id);
   if (db.todos.length < initialLength) {
     writeDatabase(db);
-    console.log("Todo deleted successfully");
     return true;
   }
-  console.log("Todo not found");
   return false;
 };
 
 const addSubTodo = (parentId, text) => {
-  const todos = getTodos();
-  const todoIndex = todos.findIndex((todo) => todo.id === parentId);
-  if (todoIndex === -1) return null;
+  const db = readDatabase();
+  const parentIndex = db.todos.findIndex((todo) => todo.id === parentId);
+  if (parentIndex === -1) return null;
 
-  const newSubTodo = { text, completed: false };
-  if (!todos[todoIndex].subTodos) {
-    todos[todoIndex].subTodos = [newSubTodo];
-  } else {
-    todos[todoIndex].subTodos.push(newSubTodo);
-  }
+  const newSubTodo = { id: Date.now(), text, completed: false };
+  db.todos[parentIndex].subTodos.push(newSubTodo);
 
-  writeDatabase({ todos }); // Changed saveTodos to writeDatabase
-  return todos[todoIndex];
+  writeDatabase(db);
+  return db.todos[parentIndex];
+};
+
+const updateSubTodo = (parentId, subTodoId, updates) => {
+  const db = readDatabase();
+  const parentIndex = db.todos.findIndex((todo) => todo.id === parentId);
+  if (parentIndex === -1) return null;
+
+  const subTodoIndex = db.todos[parentIndex].subTodos.findIndex(
+    (subTodo) => subTodo.id === subTodoId
+  );
+  if (subTodoIndex === -1) return null;
+
+  db.todos[parentIndex].subTodos[subTodoIndex] = {
+    ...db.todos[parentIndex].subTodos[subTodoIndex],
+    ...updates,
+  };
+
+  // Check if all sub-TODOs are completed
+  const allSubTodosCompleted = db.todos[parentIndex].subTodos.every(
+    (subTodo) => subTodo.completed
+  );
+  db.todos[parentIndex].completed = allSubTodosCompleted;
+
+  writeDatabase(db);
+  return db.todos[parentIndex];
 };
 
 module.exports = {
@@ -82,5 +95,6 @@ module.exports = {
   addTodo,
   updateTodo,
   deleteTodo,
-  addSubTodo, // Add this line to export the addSubTodo function
+  addSubTodo,
+  updateSubTodo,
 };

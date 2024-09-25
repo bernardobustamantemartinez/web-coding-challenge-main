@@ -75,18 +75,48 @@ function App() {
       },
       body: JSON.stringify({ text }),
     });
-    const newSubTodo = await response.json();
+    const updatedParentTodo = await response.json();
     setTodos(
-      todos.map((todo) => {
-        if (todo.id === parentId) {
-          return {
-            ...todo,
-            subtodos: [...(todo.subtodos || []), newSubTodo],
-          };
-        }
-        return todo;
-      })
+      todos.map((todo) => (todo.id === parentId ? updatedParentTodo : todo))
     );
+  };
+
+  const toggleSubTodo = async (parentId, subTodoId) => {
+    const parentTodo = todos.find((todo) => todo.id === parentId);
+    if (!parentTodo || !parentTodo.subTodos) {
+      console.error("Parent todo or sub-todos not found");
+      return;
+    }
+
+    const subTodo = parentTodo.subTodos.find((st) => st.id === subTodoId);
+    if (!subTodo) {
+      console.error("Sub-todo not found");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `/api/todos/${parentId}/subtodos/${subTodoId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ completed: !subTodo.completed }),
+        }
+      );
+
+      if (response.ok) {
+        const updatedParentTodo = await response.json();
+        setTodos(
+          todos.map((todo) => (todo.id === parentId ? updatedParentTodo : todo))
+        );
+      } else {
+        console.error("Failed to update sub-todo:", await response.text());
+      }
+    } catch (error) {
+      console.error("Error updating sub-todo:", error);
+    }
   };
 
   const sortedTodos = [...todos].sort((a, b) => {
@@ -104,6 +134,7 @@ function App() {
         deleteTodo={deleteTodo}
         togglePriority={togglePriority}
         addSubTodo={addSubTodo}
+        toggleSubTodo={toggleSubTodo} // Add this new prop
       />
     </div>
   );
