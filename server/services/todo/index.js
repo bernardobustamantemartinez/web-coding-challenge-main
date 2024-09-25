@@ -52,9 +52,26 @@ const deleteTodo = (id) => {
   return false;
 };
 
+const addSubTodo = (parentId, text) => {
+  const todos = getTodos();
+  const todoIndex = todos.findIndex((todo) => todo.id === parentId);
+  if (todoIndex === -1) return null;
+
+  const newSubTodo = { text, completed: false };
+  if (!todos[todoIndex].subTodos) {
+    todos[todoIndex].subTodos = [newSubTodo];
+  } else {
+    todos[todoIndex].subTodos.push(newSubTodo);
+  }
+
+  writeDatabase({ todos }); // Changed saveTodos to writeDatabase
+  return todos[todoIndex];
+};
+
 module.exports = {
   getTodos,
   addTodo,
   updateTodo,
   deleteTodo,
+  addSubTodo, // Add this line to export the addSubTodo function
 };

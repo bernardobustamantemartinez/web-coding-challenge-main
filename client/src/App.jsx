@@ -58,6 +58,28 @@ function App() {
     setTodos(todos.map((todo) => (todo.id === id ? updatedTodo : todo)));
   };
 
+  const addSubTodo = async (parentId, text) => {
+    const response = await fetch(`/api/todos/${parentId}/subtodos`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ text }),
+    });
+    const newSubTodo = await response.json();
+    setTodos(
+      todos.map((todo) => {
+        if (todo.id === parentId) {
+          return {
+            ...todo,
+            subtodos: [...(todo.subtodos || []), newSubTodo],
+          };
+        }
+        return todo;
+      })
+    );
+  };
+
   const sortedTodos = [...todos].sort((a, b) => {
     if (a.priority === b.priority) return 0;
     return a.priority ? -1 : 1;
@@ -72,6 +94,7 @@ function App() {
         toggleTodo={toggleTodo}
         deleteTodo={deleteTodo}
         togglePriority={togglePriority}
+        addSubTodo={addSubTodo}
       />
     </div>
   );

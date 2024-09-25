@@ -1,46 +1,41 @@
 {
   "todos": [
     {
-      "text": "Ability to add/delete todos using API calls",
-      "id": 1727222488571,
+      "id": 1,
+      "text": "Example Todo",
+      "completed": true,
+      "priority": true,
+      "subTodos": [
+        {
+          "id": 2,
+          "text": "Sub Todo 1",
+          "completed": false
+        },
+        {
+          "id": 3,
+          "text": "Sub todo 2",
+          "completed": false
+        },
+        {
+          "id": 4,
+          "text": "Sub todo 3",
+          "completed": false
+        },
+        {
+          "text": "Sub todo 4",
+          "completed": false
+        },
+        {
+          "text": "Sub todo 5",
+          "completed": false
+        }
+      ]
+    },
+    {
+      "text": "Sub Todo functionality",
+      "id": 1727258073607,
       "completed": true,
       "priority": false
-    },
-    {
-      "text": "Fix styling",
-      "id": 1727222493834,
-      "completed": true,
-      "priority": false
-    },
-    {
-      "text": "Fix add / delete functions",
-      "id": 1727223007014,
-      "completed": true,
-      "priority": false
-    },
-    {
-      "text": "CRUD functionality",
-      "id": 1727225050506,
-      "completed": true,
-      "priority": false
-    },
-    {
-      "text": "Prioritize functionality",
-      "id": 1727244765473,
-      "completed": true,
-      "priority": false
-    },
-    {
-      "text": "Sub todos",
-      "id": 1727244771761,
-      "completed": false,
-      "priority": true
-    },
-    {
-      "text": "wefwefwe",
-      "id": 1727254833357,
-      "completed": false,
-      "priority": true
     }
   ]
 }

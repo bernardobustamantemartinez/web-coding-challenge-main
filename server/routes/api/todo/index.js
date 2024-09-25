@@ -4,6 +4,7 @@ const {
   addTodo,
   updateTodo,
   deleteTodo,
+  addSubTodo,
 } = require("../../../services/todo");
 
 router.get("/", (req, res) => {
@@ -31,6 +32,17 @@ router.delete("/:id", (req, res) => {
   const success = deleteTodo(parseInt(req.params.id));
   if (success) {
     res.status(204).send();
+  } else {
+    res.status(404).json({ error: "Todo not found" });
+  }
+});
+
+router.post("/:id/subtodos", (req, res) => {
+  const parentId = parseInt(req.params.id);
+  const { text } = req.body;
+  const updatedTodo = addSubTodo(parentId, text);
+  if (updatedTodo) {
+    res.status(201).json(updatedTodo);
   } else {
     res.status(404).json({ error: "Todo not found" });
   }

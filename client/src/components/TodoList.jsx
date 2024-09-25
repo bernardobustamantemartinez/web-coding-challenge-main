@@ -1,7 +1,13 @@
 import PropTypes from "prop-types";
 import TodoItem from "./TodoItem";
 
-function TodoList({ todos, toggleTodo, deleteTodo, togglePriority }) {
+function TodoList({
+  todos,
+  toggleTodo,
+  deleteTodo,
+  togglePriority,
+  addSubTodo,
+}) {
   return (
     <ul>
       {todos.map((todo) => (
@@ -11,6 +17,7 @@ function TodoList({ todos, toggleTodo, deleteTodo, togglePriority }) {
           toggleTodo={toggleTodo}
           deleteTodo={deleteTodo}
           togglePriority={togglePriority}
+          addSubTodo={addSubTodo}
         />
       ))}
     </ul>
@@ -24,11 +31,18 @@ TodoList.propTypes = {
       text: PropTypes.string.isRequired,
       completed: PropTypes.bool.isRequired,
       priority: PropTypes.bool.isRequired,
+      subTodos: PropTypes.arrayOf(
+        PropTypes.shape({
+          text: PropTypes.string.isRequired,
+          completed: PropTypes.bool.isRequired,
+        })
+      ),
     })
   ).isRequired,
   toggleTodo: PropTypes.func.isRequired,
   deleteTodo: PropTypes.func.isRequired,
   togglePriority: PropTypes.func.isRequired,
+  addSubTodo: PropTypes.func.isRequired,
 };
 
 export default TodoList;
