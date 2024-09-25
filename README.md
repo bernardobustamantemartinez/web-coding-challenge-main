@@ -30,3 +30,14 @@ Can see the client running in
 http://localhost:3000/
 
 Endpoints can be hit like GET http://localhost:3000/api/hello
+
+---
+
+### Features to be implemented
+
+1. ✅ Ability to view my TODOs and my completed TODOs
+2. ✅ Ability to add TODOs by clicking an “add todo” button.
+3. ✅ Ability to mark a TODO as “complete”.
+4. ✅ Ability to add sub TODO’s to a TODO
+5. If all sub TODOs are completed, the parent TODO is automatically completed
+6. ✅ Ability to mark a TODO as “Priority” this moves it to the top/front of the list and there is a visual indicator it is “priority”.
