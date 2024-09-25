@@ -41,10 +41,7 @@ function App() {
     setTodos(todos.map((todo) => (todo.id === id ? updatedTodo : todo)));
   };
 
-  const deleteTodo = async (id) => {
-    await fetch(`/api/todos/${id}`, {
-      method: "DELETE",
-    });
+  const deleteTodo = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
@@ -67,8 +64,8 @@ function App() {
   });
 
   return (
-    <div className="App">
-      <h1>TODO App</h1>
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">Todo List</h1>
       <TodoForm addTodo={addTodo} />
       <TodoList
         todos={sortedTodos}

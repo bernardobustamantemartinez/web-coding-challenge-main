@@ -10,7 +10,7 @@
       "text": "Fix styling",
       "id": 1727222493834,
       "completed": false,
-      "priority": true
+      "priority": false
     },
     {
       "text": "Fix add / delete functions",
