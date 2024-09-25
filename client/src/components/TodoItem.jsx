@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import "./TodoItem.css";
 
 function TodoItem({ todo, toggleTodo, deleteTodo, togglePriority }) {
@@ -33,5 +34,17 @@ function TodoItem({ todo, toggleTodo, deleteTodo, togglePriority }) {
     </li>
   );
 }
+
+TodoItem.propTypes = {
+  todo: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
+    completed: PropTypes.bool.isRequired,
+    priority: PropTypes.bool.isRequired,
+  }).isRequired,
+  toggleTodo: PropTypes.func.isRequired,
+  deleteTodo: PropTypes.func.isRequired,
+  togglePriority: PropTypes.func.isRequired,
+};
 
 export default TodoItem;
