@@ -42,13 +42,22 @@ const updateTodo = (id, updatedTodo) => {
 };
 
 const deleteTodo = (id) => {
+  console.log(`Attempting to delete todo with id: ${id}`);
   const db = readDatabase();
+  if (!Array.isArray(db.todos)) {
+    console.log("db.todos is not an array");
+    return false;
+  }
   const initialLength = db.todos.length;
-  db.todos = db.todos.filter((todo) => todo.id !== id);
+  console.log(`Initial todos length: ${initialLength}`);
+  db.todos = db.todos.filter((todo) => todo.id !== parseInt(id));
+  console.log(`New todos length: ${db.todos.length}`);
   if (db.todos.length < initialLength) {
     writeDatabase(db);
+    console.log("Todo deleted successfully");
     return true;
   }
+  console.log("Todo not found");
   return false;
 };
 

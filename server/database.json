@@ -1,40 +1,25 @@
 {
   "todos": [
     {
-      "id": 1,
-      "text": "Example Todo",
+      "text": "Sub Todo functionality",
+      "id": 1727258073607,
       "completed": true,
-      "priority": true,
+      "priority": false,
       "subTodos": [
         {
-          "id": 2,
-          "text": "Sub Todo 1",
+          "text": "sdf",
           "completed": false
         },
         {
-          "id": 3,
-          "text": "Sub todo 2",
-          "completed": false
-        },
-        {
-          "id": 4,
-          "text": "Sub todo 3",
-          "completed": false
-        },
-        {
-          "text": "Sub todo 4",
-          "completed": false
-        },
-        {
-          "text": "Sub todo 5",
+          "text": "sdfdsf",
           "completed": false
         }
       ]
     },
     {
-      "text": "Sub Todo functionality",
-      "id": 1727258073607,
-      "completed": true,
+      "text": "newest TODO",
+      "id": 1727287590825,
+      "completed": false,
       "priority": false
     }
   ]

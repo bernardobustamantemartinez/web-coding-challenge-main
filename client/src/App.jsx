@@ -41,8 +41,17 @@ function App() {
     setTodos(todos.map((todo) => (todo.id === id ? updatedTodo : todo)));
   };
 
-  const deleteTodo = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+  const deleteTodo = async (id) => {
+    console.log(`Attempting to delete todo with id: ${id}`);
+    const response = await fetch(`/api/todos/${id}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      console.log(`Successfully deleted todo with id: ${id}`);
+      setTodos(todos.filter((todo) => todo.id !== id));
+    } else {
+      console.error(`Failed to delete todo with id: ${id}`);
+    }
   };
 
   const togglePriority = async (id) => {

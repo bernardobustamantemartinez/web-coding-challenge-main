@@ -29,10 +29,13 @@ router.put("/:id", (req, res) => {
 });
 
 router.delete("/:id", (req, res) => {
+  console.log(`DELETE request received for todo id: ${req.params.id}`);
   const success = deleteTodo(parseInt(req.params.id));
   if (success) {
+    console.log(`Successfully deleted todo with id: ${req.params.id}`);
     res.status(204).send();
   } else {
+    console.log(`Failed to delete todo with id: ${req.params.id}`);
     res.status(404).json({ error: "Todo not found" });
   }
 });
