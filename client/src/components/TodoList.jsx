@@ -8,6 +8,7 @@ function TodoList({
   togglePriority,
   addSubTodo,
   toggleSubTodo,
+  deleteSubTodo,
 }) {
   return (
     <ul>
@@ -20,6 +21,7 @@ function TodoList({
           togglePriority={togglePriority}
           addSubTodo={addSubTodo}
           toggleSubTodo={toggleSubTodo}
+          deleteSubTodo={deleteSubTodo}
         />
       ))}
     </ul>
@@ -47,6 +49,7 @@ TodoList.propTypes = {
   togglePriority: PropTypes.func.isRequired,
   addSubTodo: PropTypes.func.isRequired,
   toggleSubTodo: PropTypes.func.isRequired,
+  deleteSubTodo: PropTypes.func.isRequired,
 };
 
 export default TodoList;

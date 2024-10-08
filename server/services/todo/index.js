@@ -90,6 +90,23 @@ const updateSubTodo = (parentId, subTodoId, updates) => {
   return db.todos[parentIndex];
 };
 
+const deleteSubTodo = (parentId, subTodoId) => {
+  const db = readDatabase();
+  const parentIndex = db.todos.findIndex((todo) => todo.id === parentId);
+  if (parentIndex === -1) return null;
+
+  const initialSubTodosLength = db.todos[parentIndex].subTodos.length;
+  db.todos[parentIndex].subTodos = db.todos[parentIndex].subTodos.filter(
+    (subTodo) => subTodo.id !== subTodoId
+  );
+
+  if (db.todos[parentIndex].subTodos.length < initialSubTodosLength) {
+    writeDatabase(db);
+    return db.todos[parentIndex];
+  }
+  return null;
+};
+
 module.exports = {
   getTodos,
   addTodo,
@@ -97,4 +114,5 @@ module.exports = {
   deleteTodo,
   addSubTodo,
   updateSubTodo,
+  deleteSubTodo,
 };

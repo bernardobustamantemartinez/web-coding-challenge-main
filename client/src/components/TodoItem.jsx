@@ -9,6 +9,7 @@ function TodoItem({
   togglePriority,
   addSubTodo,
   toggleSubTodo,
+  deleteSubTodo,
 }) {
   const [isAddingSubTodo, setIsAddingSubTodo] = useState(false);
   const [subTodoText, setSubTodoText] = useState("");
@@ -95,6 +96,12 @@ function TodoItem({
               >
                 {subTodo.text}
               </span>
+              <button
+                onClick={() => deleteSubTodo(todo.id, subTodo.id)}
+                className="delete-button mr-2"
+              >
+                Delete
+              </button>
             </li>
           ))}
         </ul>
@@ -122,6 +129,7 @@ TodoItem.propTypes = {
   togglePriority: PropTypes.func.isRequired,
   addSubTodo: PropTypes.func.isRequired,
   toggleSubTodo: PropTypes.func.isRequired,
+  deleteSubTodo: PropTypes.func.isRequired,
 };
 
 export default TodoItem;

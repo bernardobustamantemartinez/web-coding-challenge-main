@@ -26,36 +26,14 @@
       "id": 1727291796223,
       "completed": true,
       "priority": false,
-      "subTodos": [
-        {
-          "id": 1727291803013,
-          "text": "sub todo 1",
-          "completed": false
-        }
-      ]
+      "subTodos": []
     },
     {
       "text": "If all sub todos are marked as complete mark parent TODO as complete",
       "id": 1727291819590,
-      "completed": true,
+      "completed": false,
       "priority": true,
-      "subTodos": [
-        {
-          "id": 1728411763509,
-          "text": "kmksmfsf",
-          "completed": true
-        },
-        {
-          "id": 1728411773566,
-          "text": "ferferfer",
-          "completed": true
-        },
-        {
-          "id": 1728411776293,
-          "text": "ferfreferf",
-          "completed": true
-        }
-      ]
+      "subTodos": []
     },
     {
       "text": "Ability to mark TODO as priority",

@@ -119,6 +119,28 @@ function App() {
     }
   };
 
+  const deleteSubTodo = async (parentId, subTodoId) => {
+    try {
+      const response = await fetch(
+        `/api/todos/${parentId}/subtodos/${subTodoId}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (response.ok) {
+        const updatedParentTodo = await response.json();
+        setTodos(
+          todos.map((todo) => (todo.id === parentId ? updatedParentTodo : todo))
+        );
+      } else {
+        console.error("Failed to delete sub-todo:", await response.text());
+      }
+    } catch (error) {
+      console.error("Error deleting sub-todo:", error);
+    }
+  };
+
   const sortedTodos = [...todos].sort((a, b) => {
     if (a.priority === b.priority) return 0;
     return a.priority ? -1 : 1;
@@ -134,7 +156,8 @@ function App() {
         deleteTodo={deleteTodo}
         togglePriority={togglePriority}
         addSubTodo={addSubTodo}
-        toggleSubTodo={toggleSubTodo} // Add this new prop
+        toggleSubTodo={toggleSubTodo}
+        deleteSubTodo={deleteSubTodo}
       />
     </div>
   );

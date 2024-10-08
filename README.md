@@ -39,8 +39,8 @@ Endpoints can be hit like GET http://localhost:3000/api/hello
 2. ✅ Ability to add TODOs by clicking an “add todo” button.
 3. ✅ Ability to mark a TODO as “complete”.
 4. ✅ Ability to add sub TODO’s to a TODO
-5. ✅If all sub TODOs are completed, the parent TODO is automatically completed
+5. ✅ If all sub TODOs are completed, the parent TODO is automatically completed
 6. ✅ Ability to mark a TODO as “Priority” this moves it to the top/front of the list and there is a visual indicator it is “priority”.
-7. Delete sub todos.
+7. ✅ Delete sub todos.
 8. Unit Tests.
 9. Connect to a database.

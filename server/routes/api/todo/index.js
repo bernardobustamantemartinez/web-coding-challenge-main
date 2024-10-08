@@ -6,6 +6,7 @@ const {
   deleteTodo,
   addSubTodo,
   updateSubTodo,
+  deleteSubTodo,
 } = require("../../../services/todo");
 
 router.get("/", (req, res) => {
@@ -56,6 +57,17 @@ router.put("/:id/subtodos/:subTodoId", (req, res) => {
   const parentId = parseInt(req.params.id);
   const subTodoId = parseInt(req.params.subTodoId);
   const updatedTodo = updateSubTodo(parentId, subTodoId, req.body);
+  if (updatedTodo) {
+    res.json(updatedTodo);
+  } else {
+    res.status(404).json({ error: "Todo or sub-todo not found" });
+  }
+});
+
+router.delete("/:id/subtodos/:subTodoId", (req, res) => {
+  const parentId = parseInt(req.params.id);
+  const subTodoId = parseInt(req.params.subTodoId);
+  const updatedTodo = deleteSubTodo(parentId, subTodoId);
   if (updatedTodo) {
     res.json(updatedTodo);
   } else {
