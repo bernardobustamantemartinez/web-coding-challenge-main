@@ -37,9 +37,25 @@
     {
       "text": "If all sub todos are marked as complete mark parent TODO as complete",
       "id": 1727291819590,
-      "completed": false,
+      "completed": true,
       "priority": true,
-      "subTodos": []
+      "subTodos": [
+        {
+          "id": 1728411763509,
+          "text": "kmksmfsf",
+          "completed": true
+        },
+        {
+          "id": 1728411773566,
+          "text": "ferferfer",
+          "completed": true
+        },
+        {
+          "id": 1728411776293,
+          "text": "ferfreferf",
+          "completed": true
+        }
+      ]
     },
     {
       "text": "Ability to mark TODO as priority",
