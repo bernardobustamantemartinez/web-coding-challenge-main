@@ -24,7 +24,7 @@ function TodoItem({
   };
 
   return (
-    <li className={`mb-2 ${todo.priority ? "bg-yellow-100 p-1 rounded" : ""}`}>
+    <li className={`mb-4 ${todo.priority ? "bg-yellow-100 p-3 rounded" : ""}`}>
       <div className="flex items-center">
         <input
           type="checkbox"
@@ -80,9 +80,12 @@ function TodoItem({
         </form>
       )}
       {todo.subTodos && todo.subTodos.length > 0 && (
-        <ul className="ml-8 mt-2">
+        <ul className="ml-8 mt-2 space-y-2 mr-2">
           {todo.subTodos.map((subTodo) => (
-            <li key={subTodo.id} className="flex items-center mb-1">
+            <li
+              key={subTodo.id}
+              className="flex items-center  mr-2 mb-1 space-y-2"
+            >
               <input
                 type="checkbox"
                 checked={subTodo.completed}
@@ -91,14 +94,16 @@ function TodoItem({
               />
               <span
                 className={
-                  subTodo.completed ? "line-through text-gray-500" : ""
+                  subTodo.completed
+                    ? "line-through text-gray-500 mr-2"
+                    : "flex items-center  mr-2 mb-1 space-y-2"
                 }
               >
                 {subTodo.text}
               </span>
               <button
                 onClick={() => deleteSubTodo(todo.id, subTodo.id)}
-                className="delete-button mr-2"
+                className="delete-button ml-2 py-1"
               >
                 Delete
               </button>
