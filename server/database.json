@@ -56,11 +56,6 @@
       "priority": true,
       "subTodos": [
         {
-          "id": 1728414856986,
-          "text": "Front End",
-          "completed": false
-        },
-        {
           "id": 1728414920813,
           "text": "Back End",
           "completed": false
