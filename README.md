@@ -33,7 +33,7 @@ Endpoints can be hit like GET http://localhost:3000/api/hello
 
 ---
 
-#### 2. Run unit tests
+#### 3. Run unit tests
 
 Run the following within the server directory.
 
