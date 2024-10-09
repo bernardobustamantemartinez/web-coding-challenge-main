@@ -16,6 +16,7 @@ function App() {
     setTodos(data);
   };
 
+  // Adds a new todo by sending a POST request to the API and updating local state
   const addTodo = async (text) => {
     const response = await fetch("/api/todos", {
       method: "POST",
@@ -28,6 +29,7 @@ function App() {
     setTodos([...todos, newTodo]);
   };
 
+  // Toggles the completion status of a todo by sending a PUT request to the API and updating local state
   const toggleTodo = async (id) => {
     const todoToToggle = todos.find((todo) => todo.id === id);
     const response = await fetch(`/api/todos/${id}`, {
@@ -41,6 +43,7 @@ function App() {
     setTodos(todos.map((todo) => (todo.id === id ? updatedTodo : todo)));
   };
 
+  // Deletes a todo by sending a DELETE request to the API and updating local state
   const deleteTodo = async (id) => {
     console.log(`Attempting to delete todo with id: ${id}`);
     const response = await fetch(`/api/todos/${id}`, {
@@ -54,6 +57,7 @@ function App() {
     }
   };
 
+  // Toggles the priority status of a todo by sending a PUT request to the API and updating local state
   const togglePriority = async (id) => {
     const todoToToggle = todos.find((todo) => todo.id === id);
     const response = await fetch(`/api/todos/${id}`, {
@@ -67,6 +71,7 @@ function App() {
     setTodos(todos.map((todo) => (todo.id === id ? updatedTodo : todo)));
   };
 
+  // Adds a sub-todo to a parent todo by sending a POST request to the API and updating local state
   const addSubTodo = async (parentId, text) => {
     const response = await fetch(`/api/todos/${parentId}/subtodos`, {
       method: "POST",
@@ -81,6 +86,7 @@ function App() {
     );
   };
 
+  // Toggles the completion status of a sub-todo by sending a PUT request to the API and updating local state
   const toggleSubTodo = async (parentId, subTodoId) => {
     const parentTodo = todos.find((todo) => todo.id === parentId);
     if (!parentTodo || !parentTodo.subTodos) {
@@ -88,6 +94,7 @@ function App() {
       return;
     }
 
+    // Find the sub-todo to toggle
     const subTodo = parentTodo.subTodos.find((st) => st.id === subTodoId);
     if (!subTodo) {
       console.error("Sub-todo not found");
@@ -95,6 +102,7 @@ function App() {
     }
 
     try {
+      // Send a PUT request to the API to update the sub-todo's completion status
       const response = await fetch(
         `/api/todos/${parentId}/subtodos/${subTodoId}`,
         {
@@ -107,6 +115,7 @@ function App() {
       );
 
       if (response.ok) {
+        // Update the local state with the new completion status
         const updatedParentTodo = await response.json();
         setTodos(
           todos.map((todo) => (todo.id === parentId ? updatedParentTodo : todo))
@@ -119,6 +128,7 @@ function App() {
     }
   };
 
+  // Deletes a sub-todo by sending a DELETE request to the API and updating local state
   const deleteSubTodo = async (parentId, subTodoId) => {
     try {
       const response = await fetch(
@@ -129,6 +139,7 @@ function App() {
       );
 
       if (response.ok) {
+        // Update the local state with the deleted sub-todo
         const updatedParentTodo = await response.json();
         setTodos(
           todos.map((todo) => (todo.id === parentId ? updatedParentTodo : todo))
@@ -141,6 +152,7 @@ function App() {
     }
   };
 
+  // Sorts the todos by priority and returns a new array
   const sortedTodos = [...todos].sort((a, b) => {
     if (a.priority === b.priority) return 0;
     return a.priority ? -1 : 1;

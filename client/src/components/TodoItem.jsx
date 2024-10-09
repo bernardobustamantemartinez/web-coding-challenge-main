@@ -15,10 +15,14 @@ function TodoItem({
   const [subTodoText, setSubTodoText] = useState("");
 
   const handleAddSubTodo = (e) => {
+    // Prevent the default behavior of the form which would cause a page refresh
     e.preventDefault();
+    // Prevent the form from submitting if the text is empty
     if (subTodoText.trim()) {
       addSubTodo(todo.id, subTodoText);
+      // Clear input field after submission
       setSubTodoText("");
+      // Hide the sub-todo input field after submission
       setIsAddingSubTodo(false);
     }
   };
@@ -114,7 +118,7 @@ function TodoItem({
     </li>
   );
 }
-
+// Define prop types for the component to ensure that the props are passed correctly
 TodoItem.propTypes = {
   todo: PropTypes.shape({
     id: PropTypes.number.isRequired,
