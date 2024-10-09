@@ -33,6 +33,15 @@ Endpoints can be hit like GET http://localhost:3000/api/hello
 
 ---
 
+#### 2. Run unit tests
+
+Run the following within the server directory.
+
+```bash
+cd server
+npm test
+```
+
 ### Features to be implemented
 
 1. ✅ Ability to view my TODOs and my completed TODOs
