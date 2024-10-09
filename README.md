@@ -42,6 +42,10 @@ cd server
 npm test
 ```
 
+![image](https://github.com/user-attachments/assets/4744fd47-a931-4dd6-a55a-982cc51b55b0)
+
+
+
 ### Features to be implemented
 
 1. ✅ Ability to view my TODOs and my completed TODOs
