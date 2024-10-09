@@ -43,4 +43,3 @@ Endpoints can be hit like GET http://localhost:3000/api/hello
 6. ✅ Ability to mark a TODO as “Priority” this moves it to the top/front of the list and there is a visual indicator it is “priority”.
 7. ✅ Delete sub todos.
 8. ✅ Unit Tests.
-9. Connect to a database.
